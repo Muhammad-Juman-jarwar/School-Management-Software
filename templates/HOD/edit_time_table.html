@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Add Time Table</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="">Edit Time table By Class and Session</a></li>
+    <li class="breadcrumb-item active">Edit Time Table</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    {% include 'includes/messages.html' %}
+
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-body">
+    <form action="{% url 'show_time_table' %}" method="post" id="frm">
+         {% csrf_token %}
+    <div class="row">
+   
+
+
+
+   
+   
+    <div class="col-12 col-sm-6">
+    <div class="form-group mx-3 sm-mx-4">
+    <label class="mx-2 sm-mx-4">Class</label>
+    <select class="form-control " id="cl" name="S_class_id" required>
+        <option value="Select_Class">Select Class</option>
+        {% for i in Class %}
+        
+        <option value="{{i.id}}"> {{i.name}}</option>
+        {% endfor %}
+     </select>
+</div>
+    </div>
+    
+  
+    <div class="col-12 col-sm-6">
+    <div class="form-group mx-2 md-mx-auto">
+    <label>Session</label>
+    <select class="form-control" name="Session_id" id="se" required>
+        <option value="Select_Session" >Select Session</option>
+        {% for i in session %}
+        
+        <option value="{{i.id}}" > {{i.Session_start}} TO {{i.Session_end}}</option>
+        {% endfor %}
+     </select>
+    </div>
+    
+
+</div>
+
+
+  
+
+
+
+
+
+    <div class="col-12 mx-2 text-center py-5">
+    <button type="submit" class="btn btn-primary">Show Time Table Data</button>
+    </div>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+</div>
+
+<script>
+
+window.addEventListener('DOMContentLoaded',function(){
+    
+    frm.addEventListener('submit',function(event){
+        se=document.getElementById("se");
+        cl=document.getElementById("cl");
+
+    
+        if (cl.value=="Select_Class" || se.value=="Select_Session"){
+            
+            event.preventDefault()
+            alert("Please select All fields")
+
+        }
+    })
+
+
+
+})
+
+
+
+
+
+
+
+</script>
+
+{% endblock %}

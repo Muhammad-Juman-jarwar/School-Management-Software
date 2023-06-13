@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Search Fee By Class and SessionYear</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'hod_home' %}">Home</a></li>
+    <li class="breadcrumb-item active">Search Fee</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    {% include 'includes/messages.html' %}
+
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-body">
+    <form action="{% url 'get_fee' %}" method="post">
+         {% csrf_token %}
+    <div class="row">
+   
+
+
+
+   
+   
+    <div class="col-12 col-sm-6">
+    <div class="form-group mx-3 sm-mx-4">
+    <label class="mx-2 sm-mx-4">Class</label>
+    <select class="form-control " name="S_class_id" required>
+        <option value="select_class">Select Class</option>
+        {% for i in Class %}
+        
+        <option value="{{i.id}}"> {{i.name}}</option>
+        {% endfor %}
+     </select>
+</div>
+    </div>
+    
+  
+    <div class="col-12 col-sm-6">
+    <div class="form-group mx-2 md-mx-auto">
+    <label>Session</label>
+    <select class="form-control" name="Session_id" required>
+        <option value="select_session">Select Session</option>
+        {% for i in session %}
+        
+        <option value="{{i.id}}" > {{i.Session_start}} TO {{i.Session_end}}</option>
+        {% endfor %}
+     </select>
+    </div>
+    
+
+</div>
+
+
+  
+
+
+
+
+
+    <div class="col-12 mx-2 text-center py-5">
+    <button type="submit" class="btn btn-primary">Get Fee</button>
+    </div>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock  %}

@@ -1,0 +1,352 @@
+{% extends 'base.html' %}
+
+{% block content  %}
+<div class="content container-fluid">
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="page-title">Send Student Notification</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'hod_home' %}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Send Student Notification</li>
+          </ul>
+        </div>
+        <div class="col-auto text-right float-right ml-auto">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                view all notification
+              </button>
+
+
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sendnotifications">
+                Send Notification To All
+              </button>
+        </div>
+      </div>
+    </div>
+  {% include 'includes/messages.html' %}
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card card-table">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table
+
+             id="table_id"   class="table table-hover table-center mb-0 "
+              >
+                <thead>
+                  <tr>
+               
+
+                     <th >SessionYears</th>
+                
+                    
+                    <th>Classes</th>
+                    <th>Message</th>
+
+                    
+
+
+
+                    
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <form method="post" action="{% url 'student_save_notification' %}" id="myform">
+                        {% csrf_token %}
+                 
+                  <tr>
+                    <td>
+
+                      
+                               
+                                                   <select class="form-control" name="session_year_id" id="s1" required>
+                                                      <option value="Select Session_Year">Select Session_Year</option>
+                                                      {% for i in Session %}
+                                                      <option value="{{i.id}}">{{i.Session_start}} To {{i.Session_end}}</option>
+                                                      {% endfor %}
+                                                      
+                                                   </select>
+                           
+
+                    </td>
+                    <td>
+
+                      
+                              
+                                                   <select class="form-control" name="S_class_id" id="s2" required>
+                                                      <option value="Select Class">Select Class</option>
+                                                      {% for i in SClass %}
+                                                      
+                                                      <option value="{{i.id}}"> {{i.name}}</option>
+                                                      {% endfor %}
+                                                   </select>
+                            
+                    </td>
+                
+                    
+                     
+                    <td>
+                        <div class="col-12 ">
+                        
+                            <div class="form-group">
+                            <textarea class="form-control" name="Notification_message"  style="height:100px; width:100%;" required></textarea>
+                            </div>
+                        </div>
+                            
+                        </td>
+                 
+                  
+                   
+                   
+
+
+                    <td class="text-center">
+                      <div class="actions">
+                       <button type="submit" class="btn btn-success" id="sub" >Send Notification</button>
+                      
+                      </div>
+                    </td>
+                  </tr>
+                 <tr>
+
+
+
+                 </tr>
+
+
+
+          </form>       
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+       
+
+<script>
+    window.addEventListener('DOMContentLoaded' ,function()
+    {var myform=document.getElementById("myform");
+    var s1=document.getElementById("s1");
+    var s2=document.getElementById("s2");
+    myform.addEventListener('submit',function(event){
+    var val1=s1.value
+    var val2=s2.value
+    if(val1=="Select Session_Year" ){
+    event.preventDefault();
+    s1.style.backgroundColor="red";
+    s1.addEventListener('change',function(){
+    s1.style.backgroundColor="white"})}else if(val2=="Select Class"){
+    event.preventDefault();
+    s2.style.backgroundColor="red"
+    s2.addEventListener('change',function(){
+    s2.style.backgroundColor="white"})}})})
+</script>
+
+
+
+
+
+
+<!-- View Notification -->
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Show All Notifications</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                  <div class="card card-table">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table
+          
+                       id="table_id"   class="table table-hover table-center mb-0 "
+                        >
+                          <thead>
+                            <tr>
+                              
+          
+                                 <th style="width:60%;">Messages</th>
+                                 <th style="width:60%;">Classes</th>
+                                 <th style="width:60%;">Sessions</th>
+                          
+                              
+                              <th  style="width:30%;" class="text-center">Status</th>
+                              
+          
+          
+          
+                              
+                           
+                            </tr>
+                          </thead>
+                          <tbody>
+                              {% for i in messag %}
+                            <tr>
+                              <td class="text-left">{{ i.message}}</td>
+                              <td class="text-left">{{ i.Class}}</td>
+                              <td class="text-left">{{ i.session}}</td>
+                              
+                           
+                              
+                               
+                             
+                           
+                            
+                             
+                             
+          
+          
+                              <td class="text-right">
+                                {% if i.status == 0 %}
+                                 <span class="btn badge badge-danger ">has not read</span>
+                                 {% else %}
+                                 <span class="btn badge badge-success pr-3 ">has read</span>
+                                {% endif %}
+                                
+                              </td>
+                            </tr>
+                            {% endfor %}
+                           
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% comment %} </div> {% endcomment %}
+                 
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Send Notification -->
+
+{% for i in SClass %}
+<div class="modal fade" id="sendnotification-{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Send Notification To {{i.admin.first_name}}&nbsp;{{i.admin.last_name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+            <form method="post" action="{% url 'save_notification' %}">
+                 {% csrf_token %}
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label ">Write Message</label>
+                  <div class="col-sm-10 mt-2">
+                    <input type="text"  class="form-control h-100" name="mess" required>
+                  <input type="text"  class="form-control" name="All" value="One" hidden>
+
+
+                  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" >Send</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    
+                  </div>
+            
+              </form>
+
+
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+
+
+
+
+
+
+
+<div class="modal fade" id="sendnotifications" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Send Notification To All</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+          <form method="post" action="{% url 'student_save_notification' %}">
+               {% csrf_token %}
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label ">Write Message</label>
+                <div class="col-sm-10 mt-2">
+                  <input type="text"  class="form-control h-100" name="Notification_message" required>
+                  <input type="text"  class="form-control" name="All" value="All" hidden>
+
+                </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" >Send</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  
+                </div>
+          
+            </form>
+
+
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock  %}

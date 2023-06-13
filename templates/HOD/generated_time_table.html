@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% load render_table from django_tables2 %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'view_time_table' %}">Time table</a></li>
+  
+    </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div id="pdf-canvas">
+
+          <div class="container mt-3" id="content">
+            <h2>Time Table</h2>
+            {% render_table table %}
+          </div>
+  </div>
+</div>
+</div>
+</div>
+ 
+
+<script>
+window.addEventListener('DOMContentLoaded',function(){
+
+
+
+th=document.querySelectorAll('.orderable a');
+for(const i of th){
+   i.href='#'
+}
+
+
+// var canvas = document.getElementById('pdf-canvas');
+
+//  // Load the PDF file from the CDN
+//  pdfjsLib.getDocument('http://127.0.0.1:8000/HOD/generate_time_table').then(function(pdf) {
+//    // Get the first page of the PDF file
+//    pdf.getPage(1).then(function(page) {
+//      // Get the viewport of the page at scale 1
+//      var viewport = page.getViewport({scale: 1});
+
+//      // Set the canvas dimensions to match the viewport
+//      canvas.width = viewport.width;
+//      canvas.height = viewport.height;
+
+//      // Render the page on the canvas
+//      page.render({
+//        canvasContext: canvas.getContext('2d'),
+//        viewport: viewport
+//      });
+//    });
+//  })
+
+
+
+
+
+
+})
+
+
+
+
+
+
+</script>
+{% endblock %}

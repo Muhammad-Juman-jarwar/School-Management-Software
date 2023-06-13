@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+      <div class="card card-table">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="table_id" class="table table-hover table-center mb-0 ">
+              <thead>
+                <tr>
+                  <th>SrNo</th>
+
+                  <th>Name</th>
+                  <th>Father Name</th>
+                  <th>Class</th>
+                  <th>Session Years</th>
+
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Message</th>
+                  <th>Applied Date</th>
+
+
+                  <th class="text-center">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+               {% for i in leave_date %}
+                <tr>
+                  <td>{{forloop.counter }}</td>
+
+                  <td>{{ i.Student_id.admin.first_name }}</td>
+                  <td>{{ i.Student_id.Father_Name }}</td>
+                  <td>{{ i.Student_id.S_Class_id }}</td>
+                  <td>{{ i.Student_id.Session_year_id.Session_start }} To {{ i.Student_id.Session_year_id.Session_end }}</td>
+                  <td>{{ i.date_from }}</td>
+                  <td>{{ i.date_to }}</td>
+                  <td>{{ i.message }}</td>
+                  <td>{{ i.created_at }}</td>
+                
+
+
+
+                  <td class="text-right ">
+                    <div class="actions">
+                        {% if i.status == 0 %}
+                      <a href="{% url 'approve_student_leave'    id=i.id %}" class="btn btn-success  ">Approve</a>
+                      <a href="{% url 'disapprove_student_leave' id=i.id %}" class="btn btn-danger">  Disapprove</a>
+                      </button>
+                    {% elif i.status == 1 %}
+                      <button type="button" class="btn btn-success  " disabled>
+                        Approved
+                      </button>
+
+                      {% elif i.status == 2 %}
+                      <button type="button" class="btn btn-danger" disabled>
+                        Disapprove
+                       </button>
+                       {% endif %}
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock  %}

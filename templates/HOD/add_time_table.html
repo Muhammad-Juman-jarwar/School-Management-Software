@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+
+
+{% block content  %}
+
+
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Add Time Table</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="subjects.html">Time table</a></li>
+    <li class="breadcrumb-item active">Add Time Table</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    {% include 'includes/messages.html' %}
+
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-body">
+    <form action="{% url 'save_time_table' %}" method="post">
+         {% csrf_token %}
+    <div class="row">
+    <div class="col-12">
+    <h5 class="form-title"><span>Time Table Information</span></h5>
+    </div>
+    <div class="col-12 col-sm-6">
+    <div class="form-group mx-3 md-mx-auto ">
+    <label class="mx-2 ">Subject</label>
+    <select class="form-control " name="subject_id" required>
+        <option value="select_subject" >Select Subject</option>
+        {% for i in subject %}
+        
+        <option value="{{i.id}}"> {{i.name}}</option>
+        {% endfor %}
+     </select>
+</div>
+
+
+</div>
+   
+   
+    <div class="col-12 col-sm-6">
+    <div class="form-group mx-3 sm-mx-4">
+    <label class="mx-2 sm-mx-4">Class</label>
+    <select class="form-control " name="S_class_id" required>
+        <option value="select_class">Select Class</option>
+        {% for i in Class %}
+        
+        <option value="{{i.id}}"> {{i.name}}</option>
+        {% endfor %}
+     </select>
+</div>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-12 col-sm-6">
+    <div class="form-group mx-2 md-mx-auto">
+    <label>Session</label>
+    <select class="form-control" name="Session_id" required>
+        <option value="select_session">Select Session</option>
+        {% for i in Session %}
+        
+        <option value="{{i.id}}" > {{i.Session_start}} TO {{i.Session_end}}</option>
+        {% endfor %}
+     </select>
+    </div>
+    
+
+
+</div>
+     
+    <div class="col-12 col-sm-6">
+        <div class="form-group mx-2 md-mx-auto">
+        <label>DAYS</label>
+        <select class="form-control" name="day" required>
+            <option value="select_days">Select DAYS</option>
+            {% for i in day %}
+            
+            <option value="{{i.0}}" > {{i.1}}</option>
+            {% endfor %}
+         </select>
+        </div>
+        </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
+            <div class="form-group mx-2 md-mx-auto">
+            <label>Tecahers</label>
+            <select class="form-control" name="teacher_id" required>
+                <option value="select_teacher">Select Teacher</option>
+                {% for i in teacher %}
+                
+                <option value="{{i.id}}" > {{i.admin.first_name}}  {{i.admin.last_name}}</option>
+                {% endfor %}
+             </select>
+            </div>
+            
+        
+        
+        </div>
+             
+            <div class="col-12 col-sm-6">
+                <div class="form-group mx-2 md-mx-auto">
+
+                    <label>Start Time</label>
+                <input type="text" class="form-control flatpickr-time  h-25" name="start_time" id="start-input"  required>
+
+                
+                    </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+<div class="form-group mx-2 md-mx-auto">
+
+                
+                <label>End Time</label>
+
+                <input type="text" class="form-control flatpickr-time  h-25" name="end_time" id="end-input"  required>
+
+                
+                
+
+                </div>
+                </div>
+                
+                </div>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+    <div class="col-12 mx-2">
+    <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+
+
+
+
+
+{% endblock  %}

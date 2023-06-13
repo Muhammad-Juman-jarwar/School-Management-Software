@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load render_table from django_tables2 %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'teacher_home' %}">Time table</a></li>
+  
+    </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col">
+  <div class="container mt-3" id="content">
+    <h2>Time Table</h2>
+    {% render_table table %}
+  </div>
+</div>
+</div>
+</div>
+ 
+
+
+{% endblock %}

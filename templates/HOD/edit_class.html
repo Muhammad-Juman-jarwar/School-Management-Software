@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+       <div class="col-sm-12">
+
+               <div class="card">
+
+                   <div class="card-body">
+                    
+                   <form method="post" action="{% url 'update_class' S_class.id %}" >
+                    
+                   {% csrf_token  %}  
+           
+                   <div class="col-12"><h5 class="form-title"><span>Edit Class</span></h5></div>
+                <!-- messages Include File -->
+
+                   {% include 'includes/messages.html' %}
+
+                 <!--    -->
+          
+                   <div class="col-sm-11">
+                   <div class="form-group"><label> Class Name</label><input type="text" class="form-control" name="Class_name" value="{{S_class.name}}" required/></div>
+                   </div>
+
+                   <div class="col-sm-11">
+                   <button type="submit" class="btn btn-primary">  Update Class</button>
+                   </div>
+               </div>
+       
+</div>
+
+
+
+{% endblock %}

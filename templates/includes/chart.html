@@ -1,0 +1,161 @@
+<script>
+
+
+
+
+
+    
+$(document).ready(function() {
+
+    // var a=document.querySelector("#Gen");
+	// var b=a.selectedOptions[0];
+	// var get=b.getAttribute('value')
+	// console.log(get)
+
+	// console.log(a.value)
+
+
+
+	
+
+	
+    
+
+
+	// Area chart
+	
+	if ($('#Pie-c').length > 0) {
+	
+        var options = {
+            series: [{{Student_count}}, {{Teacher_count}}, {{Subject_count}}, {{Class_count}}],
+            chart: {
+            width: '100%',
+			height: 350,
+
+            type: 'pie',
+          },
+          labels: ['Students', 'Teachers', 'Subjects', 'Class'],
+          responsive: [{
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200
+              },
+              legend: {
+                position: 'bottom'
+              }
+            }
+          }]
+          };
+  
+          var chart = new ApexCharts(document.querySelector("#Pie-c"), options);
+          chart.render();
+	}
+
+	// Bar chart
+    
+  
+
+       
+        if ($('#S_gender').length > 0) {
+	var optionsBar = {
+		chart: {
+			type: 'bar',
+			height: 350,
+			width: '100%',
+			stacked: true,
+			toolbar: {
+				show: false
+			},
+		},
+		dataLabels: {
+            enabled: false
+		},
+		plotOptions: {
+			bar: {
+				columnWidth: '45%',
+			}
+		},
+		series: [{
+			name: "Boys",
+			color: '#fdbb38',
+			data: [{{Smale}}],
+            
+		}, {
+			name: "Girls",
+			color: '#19affb',
+			data: [{{Sfemale}}],
+		},
+        {
+            name: "Others",
+			color: '#00ff00',
+			data: [{{Sothers}}],
+		}],
+		labels: ["Student Data"],
+		xaxis: {
+			labels: {
+				show: false
+			},
+			axisBorder: {
+				show: false
+			},
+			axisTicks: {
+                show: false
+			},
+		},
+		yaxis: {
+            axisBorder: {
+                show: false
+			},
+			axisTicks: {
+                show: false
+			},
+			labels: {
+                style: {
+                    colors: '#777'
+				}
+			}
+		},
+		title: {
+			text: '',
+			align: 'left',
+			style: {
+                fontSize: '18px'
+			}
+		}
+        
+	}
+    
+
+        }
+    
+
+	var chartBar = new ApexCharts(document.querySelector('#S_gender'), optionsBar); 
+       chartBar.render();
+    
+        
+        
+    
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+</script>

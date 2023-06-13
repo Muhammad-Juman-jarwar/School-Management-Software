@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content container-fluid">
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="page-title">Students</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="{% url 'teacher_home' %}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Students</li>
+          </ul>
+        </div>
+        <div class="col-auto text-right float-right ml-auto">
+          <a href="#" class="btn btn-outline-primary mr-2"
+            ><i class="fas fa-download"></i> Download</a
+          >
+          <a href="add-student.html" class="btn btn-primary"
+            ><i class="fas fa-plus"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+    {% include 'includes/messages.html' %}
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card card-table">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table
+
+              id="table_id"  class="table table-hover table-center mb-0 "
+              >
+                <thead>
+                  <tr>
+                    <th>Messages</th>
+                    <th>Class</th>
+                    <th>SessionYear</th>
+                    <th>Notification Recieved at</th>
+
+
+            
+                  </tr>
+                </thead>
+                <tbody>
+                   {% for i in messag %}
+                  <tr>
+                    <td>{{ i.message }}</td>
+                    <td>{{ Class }}</td>
+                    <td>{{ session }}</td>
+                    <td>{{ i.created_at }}</td>
+
+
+                
+
+
+                  </tr>
+                  {% endfor %}
+                 
+               
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+{% endblock  %}

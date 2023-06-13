@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+
+{% block content%}
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Take Attendence</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="subjects.html">Take Attendence</a></li>
+    <li class="breadcrumb-item active">Attendence</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    {% include 'includes/messages.html' %}
+
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-body">
+        {% if action is None %}
+    <form action="?action=get_student" method="post">
+         {% csrf_token %}
+    <div class="row">
+    <div class="col-12">
+    <h5 class="form-title"><span>Subject Information</span></h5>
+    </div>
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>Class</label>
+                               <select class="form-control" name="class_id" required>
+                                  <option>Select Class</option>
+                                  {% for i in S_class %}
+                                  <option value="{{i.id}}">{{i.name}}</option>
+                                  {% endfor %}
+                                  
+                               </select>
+        </div>
+    </div>
+
+
+
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>Session Year</label>
+                               <select class="form-control" name="session_year_id" required>
+                                  <option>Select Session_Year</option>
+                                  {% for i in Session_year %}
+                                  <option value="{{i.id}}">{{i.Session_start}} To {{i.Session_end}}</option>
+                                  {% endfor %}
+                                  
+                               </select>
+        </div>
+        </div>
+
+
+
+
+
+    <div class="col-12">
+    <button type="submit" class="btn btn-primary">Fetch Students</button>
+    </div>
+    </div>
+    </form>
+{% else %}
+
+
+
+
+
+<form action="{% url 'save_attendence' %}" method="post">
+    {% csrf_token %}
+<div class="row">
+<div class="col-12">
+<h5 class="form-title"><span>Attendence</span></h5>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-12 col-sm-6">
+    <div class="form-group">
+        <label>Class</label>
+                           <select class="form-control" name="class_id" required>
+                              
+                              
+                              <option value="{{get_class.id}}">{{get_class}}</option>
+                              
+                              
+                           </select>
+    </div>
+</div>
+
+
+
+
+<div class="col-12 col-sm-6">
+    <div class="form-group">
+        <label>Session Year</label>
+                           <select class="form-control" name="session_year_id" required>
+                              
+                              
+                              <option value="{{get_session.id}}">{{get_session}}</option>
+                              
+                              
+                           </select>
+    </div>
+    </div>
+
+
+
+    <div class="col-12 col-sm-6">
+        <div class="form-group">
+            <label>Attendance Date</label>
+                               <input type="date" class="form-control" name="date" required>
+        </div>
+        </div>
+
+{%  for i in students %}
+
+        <div class="col-12 mt-4 mx-4">
+            <div class="form-group">
+                <input type="checkbox" class="form-check-input" value="{{i.id}}" name="student_id">
+                <label class="form-check-label" for="check1" >{{ i.admin.first_name}}</label>
+            </div>
+            </div>
+
+
+{% endfor %}
+
+
+
+    <div class="col-12 mx-4">
+        <button type="submit" class="btn btn-primary">Save Attendance</button>
+        </div>
+        
+
+
+
+
+
+
+
+</div>
+</form>
+
+
+
+
+{% endif %}
+
+
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+
+
+{% endblock %}

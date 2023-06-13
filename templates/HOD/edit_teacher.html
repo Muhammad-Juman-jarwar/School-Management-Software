@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{%  block content  %}
+<div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+
+          
+          <form method="post" action="{% url 'update_teacher' Teacher.admin.id %}" enctype="multipart/form-data">
+            
+            {% csrf_token  %}  
+            
+            <div class="col-12">
+                <h5 class="form-title">
+                  <span>Edit Teacher</span>
+                </h5>
+              </div>
+              <!-- messages Include File -->
+
+              {% include 'includes/messages.html' %}
+
+                  <!--    -->
+
+
+
+
+              <div class=" col-sm-11">
+                <div class="form-group">
+                  <label>Profile Pic</label>
+                  <input type="file" class="form-control" name="profile_pic" />
+                  {% comment %} <input type="text" class="form-control"  value="{% for i in student %}{{i.admin.id}}{% endfor%}"  name="student_id" hidden /> {% endcomment %}
+
+                </div>
+              </div>
+              <div class="col-sm-11">
+                <div class="form-group">
+                  <label>First Name </label>
+                  <input type="text" class="form-control" value="{{Teacher.admin.first_name}}" name="first_name" />
+                </div>
+              </div>
+              <div class="col-sm-11">
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control" value=" {{Teacher.admin.last_name}}"name="last_name"/>
+                </div>
+              </div>
+              <div class="form-row mx-2 my-4">
+                <div class="col-7">
+                  <label>Father's Name</label>
+                  <input type="text" class="form-control" value="{{Teacher.Father_Name}}" name="f_name"  />
+                </div>
+                <div class="col-4">
+                  <label>Contact</label>
+                  <input type="tel" class="form-control" value="{{Teacher.contact}}" name="phone"  />
+                </div>
+                
+              </div>
+              <div class="col-sm-11">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" class="form-control" value="{{Teacher.admin.email}} " name="email" />
+                </div>
+              </div>
+              <div class="col-sm-11">
+                <div class="form-group">
+                  <label>User Name</label>
+                  <input type="text" class="form-control" value="{{Teacher.admin.username}}" name="user_name"/>
+                </div>
+              </div>
+              <div class="col-sm-11">
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control" placeholder="fill it if you want to change passowrd"  name="password" />
+                </div>
+              </div>
+
+              <div class="col-sm-11">
+                <div class="form-group">
+                    <label> Address</label>
+                    <textarea class="form-control"  name="address" >{{Teacher.address}}</textarea>
+                </div>
+              </div>
+
+              <div class="col-sm-11">
+                <div class="form-group">
+                    <label>Gender</label>
+
+                                       <select class="form-control" name="gender" required>
+                                          <option>Select Gender</option>
+                                          
+                                          {% if Teacher.gender == "Male" %}
+                                          <option value="{{Teacher.gender}}" selected>{{Teacher.gender}}</option>
+                                          <option value="Female">Female</option>
+                                          <option value="Others">Others</option>
+                                          {% endif %}
+                                          {% if Teacher.gender  == "Female" %}
+                                          <option value="{{Teacher.gender }}" selected>{{Teacher.gender }}</option>
+                                          <option value="Male">Male</option>
+                                          <option value="Others">Others</option>
+                                          {% endif %}
+                                          
+                                          {% if Teacher.gender  == "Others" %}
+                                          <option value="{{Teacher.gender }}" selected>{{Teacher.gender }}</option>
+                                          <option value="Male">Male</option>
+                                          <option value="Female">Female</option>
+                                          {% endif %}
+                                          
+                                       </select>
+                </div>
+              </div>
+
+        
+                  
+              <div class="col-sm-11">
+                <button type="submit" class="btn btn-primary">
+                  Update Student
+                </button>
+              </div>
+           
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

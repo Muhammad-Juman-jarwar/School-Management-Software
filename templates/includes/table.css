@@ -1,0 +1,72 @@
+
+<stytle>
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  th, td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    position: relative;
+  }
+
+  th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  td {
+    background-color: #fff;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  td:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+  }
+
+  .highlight {
+    background-color: #f2f2f2;
+  }
+
+  .class-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+  }
+
+  .teacher-name {
+    color: #999;
+    font-size: 0.9rem;
+  }
+
+  .animate {
+    animation: fade-in 0.5s ease-in-out;
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

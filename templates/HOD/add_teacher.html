@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <form method="post" action="{% url 'add_teacher' %}" enctype="multipart/form-data">
+            {% csrf_token  %}  
+            
+            <div class="col-12">
+                <h5 class="form-title">
+                  <span>Add Teacher</span>
+                </h5>
+              </div>
+              <!-- messages Include File -->
+
+              {% include 'includes/messages.html' %}
+
+                  <!--    -->
+
+
+
+
+              <div class=" col-sm-11">
+                <div class="form-group">
+                  <label>Profile Pic</label>
+                  <input type="file" class="form-control" name="profile_pic" required/>
+                </div>
+              </div>
+              <div class="col-sm-11">
+                <div class="form-group">
+                  <label>First Name </label>
+                  <input type="text" class="form-control" name="first_name" required/>
+                </div>
+              </div>
+              <div class="col-sm-11">
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control" name="last_name" required/>
+                </div>
+              </div>
+              <div class="form-row mx-2 my-4">
+                <div class="col-7">
+                  <label>Father's Name</label>
+                  <input type="text" class="form-control" name="f_name" required />
+                </div>
+                <div class="col-4">
+                  <label>Contact No</label>
+                  <input type="tel" class="form-control" name="phone" required />
+                </div>
+                
+              </div>
+              <div class="col-sm-11">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" class="form-control" name="email" required />
+                </div>
+              </div>
+              <div class="col-sm-11">
+                <div class="form-group">
+                  <label>User Name</label>
+                  <input type="text" class="form-control" name="user_name" required/>
+                </div>
+              </div>
+              <div class="col-sm-11">
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control" name="password" required/>
+                </div>
+              </div>
+
+              <div class="col-sm-11">
+                <div class="form-group">
+                    <label> Address</label>
+                    <textarea class="form-control" name="address" required></textarea>
+                </div>
+              </div>
+
+              <div class="col-sm-11">
+                <div class="form-group">
+                    <label>Gender</label>
+                                       <select class="form-control" name="gender" required>
+                                          <option>Select Gender</option>
+                                          <option value="Female">Female</option>
+                                          <option value="Male">Male</option>
+                                          <option value="Others">Others</option>
+                                       </select>
+                </div>
+              </div>
+
+           
+            
+
+
+
+
+
+
+
+
+
+
+
+
+              
+              <div class="col-sm-11">
+                <button type="submit" class="btn btn-primary">
+                  Add Teacher
+                </button>
+              </div>
+           
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

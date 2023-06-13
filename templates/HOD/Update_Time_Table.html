@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+
+
+
+{% block content  %}
+
+
+
+
+<div class="content container-fluid">
+
+    <div class="page-header">
+    <div class="row align-items-center">
+    <div class="col">
+    <h3 class="page-title">Update Time Table</h3>
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="subjects.html">Time table</a></li>
+    <li class="breadcrumb-item active">Update Time Table</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    {% include 'includes/messages.html' %}
+
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-body">
+    <form action="{% url 'update_time_table_data'  id %}" method="post">
+         {% csrf_token %}
+    <div class="row">
+    <div class="col-12">
+    <h5 class="form-title"><span>Time Table Information</span></h5>
+    </div>
+    <div class="col-12 col-sm-6">
+    <div class="form-group mx-3 md-mx-auto ">
+    <label class="mx-2 ">Subject</label>
+<!-- <input type="text" value="{{id}}" name="t_id" hidden> -->
+    <select class="form-control " name="subject_id" required>
+        <!-- <option value="select_subject" >Select Subject</option> -->
+        
+        {% for i in subject %}
+
+        {% if i.id == Table_data.subject.id %}
+        <option value="{{i.id}}" selected> {{i.name}}</option>
+
+        {% else %}
+        <option value="{{i.id}}"> {{i.name}}</option>
+        {% endif %}
+        {% endfor %}
+        
+     </select>
+</div>
+
+
+</div>
+   
+   
+    <div class="col-12 col-sm-6">
+    <div class="form-group mx-3 sm-mx-4">
+    <label class="mx-2 sm-mx-4">Class</label>
+    <select class="form-control " name="S_class_id" required>
+        <option value="select_class">Select Class</option>
+        {% for i in Class %}
+        {% if i.id == Table_data.CLass.id %}
+        <option value="{{i.id}}" selected> {{i.name}}</option>
+        {% else %}
+        
+        <option value="{{i.id}}"> {{i.name}}</option>
+        {% endif %}
+        {% endfor %}
+     </select>
+</div>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-12 col-sm-6">
+    <div class="form-group mx-2 md-mx-auto">
+    <label>Session</label>
+    <select class="form-control" name="Session_id" required>
+        <option value="select_session">Select Session</option>
+        {% for i in Session %}
+        {% if i.id == Table_data.Session_year_id.id %}
+        <option value="{{i.id}}" selected> {{i.Session_start}} TO {{i.Session_end}}</option>
+
+        {% else %}
+        <option value="{{i.id}}" > {{i.Session_start}} TO {{i.Session_end}}</option>
+        {% endif %}
+        {% endfor %}
+     </select>
+    </div>
+    
+
+
+</div>
+     
+    <div class="col-12 col-sm-6">
+        <div class="form-group mx-2 md-mx-auto">
+        <label>DAYS</label>
+        <select class="form-control" name="day" required>
+            {% for i in day %}
+
+            {% if i == Table_data.day %}
+            
+            <option value="{{i.0}}" selected> {{i.1}}</option>
+            {% else %}
+            <option value="{{i.0}}" > {{i.1}}</option>
+            {% endif %}
+            {% endfor %}
+         </select>
+        </div>
+        </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
+            <div class="form-group mx-2 md-mx-auto">
+            <label>Tecahers</label>
+            <select class="form-control" name="teacher_id" required>
+                <option value="select_teacher">Select Teacher</option>
+                {% for i in teacher %}
+                {% if i == Table_data.Teacher_id %}
+                <option value="{{i.id}}" selected> {{i.admin.first_name}}  {{i.admin.last_name}}</option>
+                {% else %}
+                <option value="{{i.id}}" > {{i.admin.first_name}}  {{i.admin.last_name}}</option>
+                {% endif %}
+                {% endfor %}
+             </select>
+            </div>
+            
+        
+        
+        </div>
+             
+            <div class="col-12 col-sm-6">
+                <div class="form-group mx-2 md-mx-auto">
+
+                    <label>Start Time</label>
+
+                <input type="text" class="form-control flatpickr-time  h-25" name="start_time" id="time-input" value="{{ Table_data.start_time }}" required>
+                    </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+<div class="form-group mx-2 md-mx-auto">
+
+                
+                <label>End Time</label>
+
+                <input type="text" class="form-control flatpickr-time h-25" name="end_time" value="{{ Table_data.end_time}}" required>
+
+                
+              
+
+                </div>
+                </div>
+                
+                </div>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+    <div class="col-12 mx-2">
+    <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+
+
+
+
+
+
+
+
+{% endblock  %}
