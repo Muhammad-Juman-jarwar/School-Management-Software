@@ -91,14 +91,14 @@ WSGI_APPLICATION = 'school_managment_system.wsgi.application'
 # }
 
 DATABASES = {
-    'default: {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'school_system',
         'USER': 'usamarehman',
         'PASSWORD': '12131415',
         'HOST': 'localhost',
         'PORT': '',
-    }'
+    }
 }
 
 # Password validation
